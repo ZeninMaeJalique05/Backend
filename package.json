@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --check server.js && node --check routes/bookRoutes.js && node --check controllers/bookController.js && node --check services/booksevices.js && node --check models/bookmodels.js && node --check config/db.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
