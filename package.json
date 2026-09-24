@@ -1,20 +1,20 @@
 {
-  "name": "backend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js",
-    "test": "node --check server.js && node --check routes/bookRoutes.js && node --check controllers/bookController.js && node --check services/booksevices.js && node --check models/bookmodels.js && node --check config/db.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "module",
-  "dependencies": {
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1",
-    "mysql2": "^3.24.4"
-  }
+    "name": "backend",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "dev": "node --watch app.js",
+        "test": "node --check app.js && node --check routes/bookRoutes.js && node --check controllers/bookController.js && node --check services/booksevices.js && node --check models/bookmodels.js && node --check config/db.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "module",
+    "dependencies": {
+        "dotenv": "^17.4.2",
+        "express": "^5.2.1",
+        "mysql2": "^3.24.4"
+    }
 }

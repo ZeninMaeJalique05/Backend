@@ -1,6 +1,7 @@
-import * as bookServices from '../services/booksevices.js';
+import * as bookModel from "../models/bookmodels.js";
 
-export const fetchAllBooks = async (requestAnimationFrame, res) => {
-    const books = await bookServices.fetchAllBooks();
-    res.status(200).json(books);
-}
+export const fetchAllBooks = async () => {
+    const books = await bookModel.getAllBooks();
+
+    return books;
+};
