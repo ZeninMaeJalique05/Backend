@@ -1,7 +1,13 @@
-import pool from "../config/db.js";
+import mysql from 'mysql2/promise';
 
-export const getAllBooks = async () => {
-    const [rows] = await pool.query("SELECT * FROM books");
+const pool = mysql.createPool({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "Librarydb"
+});
 
+export const fetchAllBooks = async () => {
+    const [rows] = await pool.query('SELECT * FROM books');
     return rows;
 };
