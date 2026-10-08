@@ -11,3 +11,13 @@ export const fetchAllBooks = async () => {
     const [rows] = await pool.query('SELECT * FROM books');
     return rows;
 };
+
+// insert
+export const insert = async (book) => {
+    const [result] = await pool.query(
+        "INSERT INTO books(title, author) VALUES (?, ?)",
+        [book.title, book.author]
+    );
+
+    return result.insertId;
+};
