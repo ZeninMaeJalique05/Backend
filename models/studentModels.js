@@ -21,3 +21,12 @@ export const insert = async (student) => {
 
     return result.insertId;
 };
+
+//update
+export const update = async (student) => {
+    const [result] = await pool.query(
+        "UPDATE students SET name = ?, srcode = ?, program = ? WHERE id = ?",
+        [student.name, student.srcode, student.program, student.id]
+    );
+    return result.affectedRows;
+};

@@ -1,12 +1,6 @@
-import mysql from 'mysql2/promise';
+import pool from '../config/db.js';
 
-const pool = mysql.createPool({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "Librarydb"
-});
-
+//read
 export const fetchAllBooks = async () => {
     const [rows] = await pool.query('SELECT * FROM books');
     return rows;
@@ -20,4 +14,13 @@ export const insert = async (book) => {
     );
 
     return result.insertId;
+};
+
+//update
+export const update = async (book) => {
+    const [result] = await pool.query(
+        "UPDATE books SET title = ?, author = ? WHERE id = ?",
+        [book.title, book.author, book.id]
+    );
+    return result.affectedRows;
 };
