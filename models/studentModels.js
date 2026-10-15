@@ -30,3 +30,11 @@ export const update = async (student) => {
     );
     return result.affectedRows;
 };
+
+//delete
+export const remove = async (id) => {
+    const [result] = await pool.query(
+        "DELETE FROM students WHERE id = ?",[id]
+    );
+    return result.affectedRows;
+}
