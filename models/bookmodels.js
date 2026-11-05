@@ -6,7 +6,20 @@ export const fetchAllBooks = async () => {
     return rows;
 };
 
-// insert
+export const findBookByNameAndAuthor = async(book) =>{
+    const [rows] = await pool.query("SELECT * FROM books WHERE title = ? AND author = ?", 
+        [book.title, book.author]
+    );
+    return rows;
+}
+
+export const findBookById = async(id) =>{
+    const [rows] = await pool.query("SELECT * FROM books WHERE id = ?", 
+        [id]
+    );
+    return rows;
+}
+
 export const insert = async (book) => {
     const [result] = await pool.query(
         "INSERT INTO books(title, author) VALUES (?, ?)",
@@ -32,3 +45,4 @@ export const remove = async (id) => {
     );
     return result.affectedRows;
 }
+
