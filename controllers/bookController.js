@@ -1,3 +1,4 @@
+
 import * as bookService from '../services/bookService.js';
 
 export const fetchAllBooks = async (req, res) => {
@@ -18,11 +19,10 @@ export const createBooks = async (req, res) => {
         });
     } catch (e) {
         console.log(e);
-        res.status(e.statusCode).json({
+        res.status(e.statusCode || 500).json({
             error: e.message
         });
     }
-
 };
 
 export const editBook = async (req, res) => {
@@ -30,7 +30,7 @@ export const editBook = async (req, res) => {
     const { id } = req.params;
     const book = { id: parseInt(id), title, author };
 
-    try{
+    try {
         const updatedBook = await bookService.updateBook(book);
         res.status(200).json({
             success: true,
@@ -38,16 +38,16 @@ export const editBook = async (req, res) => {
         });
     } catch (e) {
         console.log(e);
-        res.status(500).json({
-            error: "Internal Server Error"
+        res.status(e.statusCode || 500).json({
+            error: e.message
         });
     }
-}
+};
 
 export const deleteBook = async (req, res) => {
     const { id } = req.params;
 
-    try{
+    try {
         const deletedBook = await bookService.deleteBook(parseInt(id));
         res.status(200).json({
             success: true,
@@ -55,8 +55,8 @@ export const deleteBook = async (req, res) => {
         });
     } catch (e) {
         console.log(e);
-        res.status(500).json({
-            error: "Internal Server Error"
+        res.status(e.statusCode || 500).json({
+            error: e.message
         });
     }
-}
+};
