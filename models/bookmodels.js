@@ -42,7 +42,7 @@ export const update = async (book) => {
 };
 
 //delete
-export const remove = async (id) => {
+export const deleteBook = async (id) => {
     const [result] = await pool.query(
         "DELETE FROM books WHERE id = ?", [id]
     );

@@ -1,14 +1,22 @@
-import mysql from 'mysql2/promise';
-
-const pool = mysql.createPool({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "Librarydb"
-});
+import pool from '../config/db.js';
 
 export const fetchAllStudents = async () => {
     const [rows] = await pool.query('SELECT * FROM students');
+    return rows;
+};
+
+export const findStudentByNameAndAuthor = async(student) => {
+    const [rows] = await pool.query(
+        "SELECT * FROM students WHERE name = ? AND srcode = ? AND program = ?",
+        [student.name, student.srcode, student.program]
+    );
+    return rows;
+};
+
+export const findStudentById = async(id) => {
+    const [rows] = await pool.query(
+        "SELECT * FROM students WHERE id = ?",[id]
+    );
     return rows;
 };
 
@@ -32,7 +40,7 @@ export const update = async (student) => {
 };
 
 //delete
-export const remove = async (id) => {
+export const deleteStudent = async (id) => {
     const [result] = await pool.query(
         "DELETE FROM students WHERE id = ?",[id]
     );

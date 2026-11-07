@@ -24,10 +24,14 @@ const doesBookExist = async (book) => {
 };
 
 export const createBook = async (book) => {
+    if (!book.title || !book.author) {
+        throw new ValidationError(404, "Title and author are required");
+    }
+
     const existing = await doesBookExist(book);
 
     if (existing) {
-        throw new ValidationError(404, 'Book already exists!');
+        throw new ValidationError(409, 'Book already exists!');
     }
 
     const bookId = await bookModel.insert(book);
@@ -35,6 +39,9 @@ export const createBook = async (book) => {
 };
 
 export const updateBook = async (book) => {
+    if (!book.title || !book.author) {
+        throw new ValidationError(404, "Title and author are required");
+    }
     const existing = await doesBookExist(book);
 
     if (!existing) {
@@ -46,12 +53,12 @@ export const updateBook = async (book) => {
 };
 
 export const deleteBook = async (id) => {
-    const book = (id);
-    const existing = await doesBookExist(book);
-    
+    const existing = await doesBookExist({ id });
+
     if (!existing) {
         throw new ValidationError(404, 'Book does not exist!');
     }
 
+    const deletedBook = await bookModel.deleteBook(id);
     return deletedBook;
 };

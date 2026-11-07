@@ -1,4 +1,3 @@
-
 import * as bookService from '../services/bookService.js';
 
 export const fetchAllBooks = async (req, res) => {
@@ -12,14 +11,13 @@ export const createBooks = async (req, res) => {
 
     try {
         const bookId = await bookService.createBook(book);
-
         res.status(200).json({
             success: true,
             message: bookId
         });
     } catch (e) {
         console.log(e);
-        res.status(e.statusCode || 500).json({
+        res.status(e.statusCode).json({
             error: e.message
         });
     }
@@ -38,7 +36,7 @@ export const editBook = async (req, res) => {
         });
     } catch (e) {
         console.log(e);
-        res.status(e.statusCode || 500).json({
+        res.status(e.statusCode).json({
             error: e.message
         });
     }
@@ -46,7 +44,6 @@ export const editBook = async (req, res) => {
 
 export const deleteBook = async (req, res) => {
     const { id } = req.params;
-
     try {
         const deletedBook = await bookService.deleteBook(parseInt(id));
         res.status(200).json({
@@ -55,7 +52,7 @@ export const deleteBook = async (req, res) => {
         });
     } catch (e) {
         console.log(e);
-        res.status(e.statusCode || 500).json({
+        res.status(e.statusCode).json({
             error: e.message
         });
     }
